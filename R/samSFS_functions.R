@@ -157,7 +157,7 @@ count_true_partitions <- function(af_vector, u = 10, lower_bound = 0.01) {
   return(list(counts = bin_counts, range_info = range_info))
 }
 
-# ✅ Final fixed bin label function
+# Final fixed bin label function
 generate_average_mixture_vector <- function(rho, m, omega, time_vec,
                                             n_replicates = 100, G = 240e6,
                                             u = 10, lower_bound = 0.01,
@@ -220,7 +220,7 @@ compute_af_grid_across_samples <- function(rho_vals, m_vals, omega_vals,
     time_vec <- time_vec[!is.na(time_vec)]
     
     if (length(time_vec) == 0) {
-      warning(sprintf("⚠️ Skipping %s: empty or invalid time vector", row$sample_id))
+      warning(sprintf("Skipping %s: empty or invalid time vector", row$sample_id))
       return(NULL)
     }
     
@@ -244,7 +244,7 @@ compute_af_grid_across_samples <- function(rho_vals, m_vals, omega_vals,
     if (!is.null(mixture)) {
       return(data.frame(row, as.list(mixture), stringsAsFactors = FALSE, check.names = FALSE))
     } else {
-      warning(sprintf("⚠️ Simulation failed for %s", row$sample_id))
+      warning(sprintf("Simulation failed for %s", row$sample_id))
       return(NULL)
     }
   }, mc.cores = n_cores)
@@ -252,7 +252,7 @@ compute_af_grid_across_samples <- function(rho_vals, m_vals, omega_vals,
   df <- do.call(rbind, grid_results)
   
   if (is.null(df) || nrow(df) == 0) {
-    warning("❌ Grid simulation failed: no rows returned.")
+    warning("Grid simulation failed: no rows returned.")
     return(NULL)
   }
   
@@ -284,8 +284,8 @@ analyze_real_data_wrapper <- function(time_data, af_data, output_dir,
     cat(sprintf("Output folder: %s\n\n", normalizePath(output_dir)))
   }
   
-  if (verbose) cat("▶️ Starting real data analysis...\n")
-  if (verbose) cat("▶️ Computing theoretical allele frequency grid...\n")
+  if (verbose) cat("Starting real data analysis...\n")
+  if (verbose) cat("Computing theoretical allele frequency grid...\n")
   
   if (!is.null(grid_override)) {
     grid_output <- grid_override
@@ -298,7 +298,7 @@ analyze_real_data_wrapper <- function(time_data, af_data, output_dir,
     cat("✔️ Saved grid_output.rds\n")
   }
   
-  if (verbose) cat("▶️ Binning real allele frequency data...\n")
+  if (verbose) cat("Binning real allele frequency data...\n")
   bin_edges <- seq(lower_bound, 1, length.out = u + 1)
   bin_labels <- paste0("bin_", sprintf("%.3f", head(bin_edges, -1)), "-", sprintf("%.3f", tail(bin_edges, -1)))
   
@@ -318,14 +318,14 @@ analyze_real_data_wrapper <- function(time_data, af_data, output_dir,
   rownames(af_data_binned) <- NULL
   
   if ("batch_id" %in% names(time_data)) {
-    if (verbose) cat("▶️ Merging batch_id information from time_data...\n")
+    if (verbose) cat("Merging batch_id information from time_data...\n")
     af_data_binned <- merge(af_data_binned, time_data[, c("branch_name", "batch_id")],
                             by = "branch_name", all.x = TRUE)
   } else {
-    warning("⚠️ No 'batch_id' column found in time_data. Proceeding without batch grouping.")
+    warning("No 'batch_id' column found in time_data. Proceeding without batch grouping.")
   }
   
-  if (verbose) cat("▶️ Evaluating likelihoods for real AF data...\n")
+  if (verbose) cat("Evaluating likelihoods for real AF data...\n")
   lik_output <- safe_likelihood_evaluation_joint(grid_output, af_data_binned,
                                                  joint_mode, top_n, return_summary,
                                                  n_cores = n_cores_eval)
@@ -379,8 +379,8 @@ analyze_real_data_wrapper <- function(time_data, af_data, output_dir,
   
   end_time <- Sys.time()
   runtime <- difftime(end_time, start_time, units = "mins")
-  cat(sprintf("\n✅ Run finished at: %s\n", end_time))
-  cat(sprintf("🕰️ Total runtime: %.2f minutes\n", as.numeric(runtime)))
+  cat(sprintf("\n Run finished at: %s\n", end_time))
+  cat(sprintf("Total runtime: %.2f minutes\n", as.numeric(runtime)))
   
   if (!is.null(output_dir)) {
     sink(type = "message")
@@ -415,7 +415,7 @@ run_estimation_and_summarize <- function(time_data,
   grid_key <- paste0(round(time_vec, 6), collapse = "_")
   
   if (!grid_key %in% names(grid_cache)) {
-    stop("❌ Grid cache does not contain entry for time vector: ", grid_key)
+    stop("Grid cache does not contain entry for time vector: ", grid_key)
   }
   
   grid_output <- grid_cache[[grid_key]]
@@ -475,8 +475,6 @@ run_estimation_and_summarize <- function(time_data,
 
 
 
-# samSFS_grid.R
-
 precompute_grid_cache <- function(time_data, rho_vals, m_vals, omega_vals,
                                   u = 10, G = 240e6, lower_bound = 0.01,
                                   n_replicates = 10, n_cores = 1) {
@@ -513,7 +511,6 @@ precompute_grid_cache <- function(time_data, rho_vals, m_vals, omega_vals,
 
 
 
-# Enhanced wrapper for real data analysis (includes summary)
 analyze_real_data_fresh <- function(time_data,
                                     af_data,
                                     output_dir,
@@ -541,12 +538,12 @@ analyze_real_data_fresh <- function(time_data,
     log_connection <- file(log_file_path, open = "wt")
     sink(log_connection, type = "output")
     sink(log_connection, type = "message")
-    cat(sprintf("📅 Run started at: %s\n", start_time))
+    cat(sprintf("Run started at: %s\n", start_time))
     cat(sprintf("Output folder: %s\n\n", normalizePath(output_dir)))
   }
   
-  if (verbose) cat("▶️ Starting real data analysis...\n")
-  if (verbose) cat("▶️ Computing theoretical allele frequency grid...\n")
+  if (verbose) cat("Starting real data analysis...\n")
+  if (verbose) cat("Computing theoretical allele frequency grid...\n")
   
   grid_output <- compute_af_grid_across_samples(
     rho_vals = rho_vals,
@@ -568,7 +565,7 @@ analyze_real_data_fresh <- function(time_data,
     cat("✔️ Saved grid_output.rds\n")
   }
   
-  if (verbose) cat("▶️ Binning real allele frequency data...\n")
+  if (verbose) cat("Binning real allele frequency data...\n")
   bin_edges <- seq(lower_bound, 1, length.out = u + 1)
   bin_labels <- paste0("bin_", sprintf("%.3f", head(bin_edges, -1)), "-", sprintf("%.3f", tail(bin_edges, -1)))
   
@@ -588,13 +585,13 @@ analyze_real_data_fresh <- function(time_data,
   rownames(af_data_binned) <- NULL
   
   if ("batch_id" %in% names(time_data)) {
-    if (verbose) cat("▶️ Merging batch_id information from time_data...\n")
+    if (verbose) cat("Merging batch_id information from time_data...\n")
     af_data_binned <- merge(af_data_binned, time_data[, c("branch_name", "batch_id")], by = "branch_name", all.x = TRUE)
   } else {
-    warning("⚠️ No 'batch_id' column found in time_data. Proceeding without batch grouping.")
+    warning("No 'batch_id' column found in time_data. Proceeding without batch grouping.")
   }
   
-  if (verbose) cat("▶️ Evaluating likelihoods for real AF data...\n")
+  if (verbose) cat("Evaluating likelihoods for real AF data...\n")
   lik_output <- safe_likelihood_evaluation_joint(grid_output, af_data_binned, TRUE, top_n, return_summary, n_cores = n_cores_eval)
   
   if (apply_omega_penalty && !is.null(total_mutations_override) && total_mutations_override > 0) {
@@ -644,8 +641,8 @@ analyze_real_data_fresh <- function(time_data,
   
   end_time <- Sys.time()
   runtime <- difftime(end_time, start_time, units = "mins")
-  cat(sprintf("\n✅ Run finished at: %s\n", end_time))
-  cat(sprintf("🕰️ Total runtime: %.2f minutes\n", as.numeric(runtime)))
+  cat(sprintf("\n Run finished at: %s\n", end_time))
+  cat(sprintf("Total runtime: %.2f minutes\n", as.numeric(runtime)))
   
   if (!is.null(output_dir)) {
     sink(type = "message")
@@ -777,7 +774,7 @@ run_samSFS_simulation <- function(n_samples, branching_times, samples_per_batch,
   for (i in seq_len(nrow(true_params))) {
     param_row <- true_params[i, ]
     param_suffix <- sprintf("rho%.3f_m%d_omega%.2e", param_row$rho, param_row$m, param_row$omega)
-    message(sprintf("▶️ Running simulation %d of %d: %s", i, nrow(true_params), param_suffix))
+    message(sprintf("Running simulation %d of %d: %s", i, nrow(true_params), param_suffix))
     
     param_output_dir <- file.path(output_dir, param_suffix)
     dir.create(param_output_dir, showWarnings = FALSE, recursive = TRUE)
@@ -827,10 +824,10 @@ run_samSFS_simulation <- function(n_samples, branching_times, samples_per_batch,
     write.csv(est_result$batched,
               file = file.path(output_dir, paste0("batched_", param_suffix, ".csv")), row.names = FALSE)
     
-    # 🧹 Remove subfolder if it's empty
+    # Remove subfolder if it's empty
     if (length(list.files(param_output_dir, recursive = TRUE)) == 0) {
       unlink(param_output_dir, recursive = TRUE)
-      message("🧹 Removed empty folder: ", param_output_dir)
+      message("Removed empty folder: ", param_output_dir)
     }
     
     results_list[[i]] <- list(individual = est_result$individual, batched = est_result$batched)
@@ -898,7 +895,7 @@ summarize_top_models_weighted <- function(
     filter(n_rows < top_n)
   
   if (nrow(too_few) > 0) {
-    stop("❌ Error: The following ", id_col, "(s) have fewer than ", top_n, " rows:\n",
+    stop("Error: The following ", id_col, "(s) have fewer than ", top_n, " rows:\n",
          paste(too_few[[id_col]], collapse = ", "))
   }
   
@@ -957,7 +954,7 @@ summarize_top_models_weighted <- function(
     out_name <- paste0("summary_", id_col, ".csv")
     out_path <- file.path(output_dir, out_name)
     write.csv(result, file = out_path, row.names = FALSE)
-    message("📁 Summary written to: ", out_path)
+    message("Summary written to: ", out_path)
   }
   
   return(result)
