@@ -1,0 +1,16 @@
+
+# R-specific
+.Rhistory
+.RData
+.Rproj.user/
+
+# C++ object files
+*.o
+*.so
+*.dll
+
+# MacOS
+.DS_Store
+
+# Output or result folders
+results/
