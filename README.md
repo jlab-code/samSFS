@@ -1,6 +1,7 @@
 # samSFS
 
 **Somatic evolution of stem cell mutations in long-lived plants**
+
 Long-lived perennial plants accumulate numerous somatic mutations with age. Mutations originating in stem cells at the shoot apex often become fixed in large sectors of the plant body due to cell lineage drift during repeated branching. Understanding the somatic evolution of such mutations requires knowledge of the effective stem cell population size, the cellular bottleneck strength during branch initiation, and the mutation rate. Here we show that these parameters can be estimated directly from cell-layer-specific DNA sequencing data, thus filling a gap where no other in vivo method exists.
 
 ---
@@ -38,7 +39,7 @@ Rcpp::sourceCpp("src/simulate_processes.cpp")
 samSFS/
 ├── R/                  # Core R functions (contains all modular R core functions)
 ├── src/                # C++ simulation engine
-├── data/               # Input data (Example data from Goel et al. 2024)
+├── data/               # Input data (contains example data from Goel et al. 2024)
 ├── results/            # Output folders created by scripts
 ├── demo/               # Demo scripts for real and simulated analyses
 ├── README.md           # Project documentation
