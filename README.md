@@ -11,6 +11,7 @@ Long-lived perennial plants accumulate numerous somatic mutations with age. Muta
 To get started, clone the repository to your project folder:
 ```bash
 git clone https://github.com/jlab-code/samSFS.git
+cd samSFS
 ```
 ---
 ### Recommended: Use as an RStudio Project
