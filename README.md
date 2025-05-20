@@ -1,8 +1,10 @@
 # samSFS
 
-**Somatic evolution of stem cell mutations in long-lived plants**
+**Inferring omatic evolution of stem cell mutations in long-lived plants**
 
-Long-lived perennial plants accumulate numerous somatic mutations with age. Mutations originating in stem cells at the shoot apex often become fixed in large sectors of the plant body due to cell lineage drift during repeated branching. Understanding the somatic evolution of such mutations requires knowledge of the effective stem cell population size, the cellular bottleneck strength during branch initiation, and the mutation rate. Here we show that these parameters can be estimated directly from cell-layer-specific DNA sequencing data, thus filling a gap where no other in vivo method exists.
+Long-lived perennial plants accumulate numerous somatic mutations with age. Mutations originating in stem cells at the shoot apex often become fixed in large sectors of the plant body due to cell lineage drift during repeated branching. Understanding the somatic evolution of such mutations requires knowledge of the effective stem cell population size, the cellular bottleneck strength during branch initiation, and the mutation rate. This repository provides **statistical tools to estimate these parameters directly from cell-layer-specific DNA sequencing data**. 
+
+Details regarding the biological framework and theoretical model can be found in Johannes (2025).
 
 ---
 ## Installation
@@ -50,7 +52,7 @@ To run the full pipeline on real observed data:
 
 ### Option 1: Open as RStudio Project (Recommended)
 1. Clone the repo.
-2. In RStudio, go to **File → Open Project...** and select the `samSFS/` folder.
+2. In RStudio, go to **File → Open Project → ...** and select the `samSFS/` folder.
 3. Open `demo/test_real_data.R` and run the code line-by-line.
 4. Output will be saved to: `results/real_data_results/`
 
