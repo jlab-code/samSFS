@@ -11,7 +11,6 @@ Details regarding the biological framework and theoretical model can be found in
 To get started, clone the repository to your project folder:
 ```bash
 git clone https://github.com/jlab-code/samSFS.git
-cd samSFS
 ```
 ---
 ### Recommended: Use as an RStudio Project
