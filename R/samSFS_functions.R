@@ -125,13 +125,8 @@ safe_likelihood_evaluation_joint <- function(
 
 
 
-
-# ----------------------------
-# Final Unified AF Mixture Analysis Script (Fully Fixed)
-# ----------------------------
-
-library(parallel)
-library(dplyr)
+#library(parallel)
+#library(dplyr)
 
 # Requires simulate_process_to_fixed_iteration() from simulate_processes.cpp
 # Rcpp::sourceCpp("simulate_processes.cpp")
@@ -148,7 +143,8 @@ run_n_processes <- function(m, rho, n, small_arc_threshold, mu_behavior) {
   )
 }
 
-# Bin helper
+
+
 count_true_partitions <- function(af_vector, u = 10, lower_bound = 0.01) {
   af_vector <- af_vector[!is.na(af_vector) & af_vector >= lower_bound & af_vector <= 1]
   bin_edges <- seq(lower_bound, 1, length.out = u + 1)
@@ -157,7 +153,8 @@ count_true_partitions <- function(af_vector, u = 10, lower_bound = 0.01) {
   return(list(counts = bin_counts, range_info = range_info))
 }
 
-# Final fixed bin label function
+
+
 generate_average_mixture_vector <- function(rho, m, omega, time_vec,
                                             n_replicates = 100, G = 240e6,
                                             u = 10, lower_bound = 0.01,
@@ -197,7 +194,6 @@ generate_average_mixture_vector <- function(rho, m, omega, time_vec,
 
 
 
-# Rebuilds grid
 compute_af_grid_across_samples <- function(rho_vals, m_vals, omega_vals,
                                            time_data, u, lower_bound,
                                            G, n_replicates,
@@ -660,7 +656,7 @@ analyze_real_data_fresh <- function(time_data,
 
 
 
-# samSFS_setup.R
+
 
 set_samSFS_threads <- function(simulation_cores = 2, grid_cores = 2, eval_cores = 2) {
   RcppParallel::setThreadOptions(numThreads = simulation_cores)
@@ -681,19 +677,6 @@ set_samSFS_grid <- function(rho_vals, m_vals, omega_vals,
   options(samSFS.n_replicates = n_replicates)
 }
 
-
-
-
-# samSFS_simulation_core.R
-
-# This file contains the patched simulation core logic including mutation tracking and Poisson support
-
-# --- simulate_af_data() and related logic in patched form already delivered in samSFS_poisson_patch
-
-# simulate_af_data: returns af_data and total_mutations
-# run_samSFS_simulation: coordinates one simulation run
-# run_estimation_and_summarize: connects AF data to inference engine
-# These functions are already adapted and included in samSFS_poisson_patch
 
 
 simulate_af_data <- function(time_data,
@@ -847,8 +830,6 @@ run_samSFS_simulation <- function(n_samples, branching_times, samples_per_batch,
 }
 
 
-
-# samSFS_time.R
 
 generate_time_data <- function(n_samples = 10,
                                branching_times = c(1.0, 1.0, 1.0),
