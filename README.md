@@ -4,7 +4,7 @@
 
 Long-lived perennial plants accumulate numerous somatic mutations with age. Mutations originating in stem cells at the shoot apex often become fixed in large sectors of the plant body due to cell lineage drift during repeated branching. Understanding the somatic evolution of such mutations requires knowledge of the effective stem cell population size, the cellular bottleneck strength during branch initiation, and the mutation rate. This repository provides **statistical tools to estimate these parameters directly from cell-layer-specific DNA sequencing data**. 
 
-Details regarding the biological framework and theoretical model can be found in Johannes (2025).
+**Note:** Details regarding the biological framework and theoretical model can be found in Johannes (2025).
 
 ---
 ## Installation
