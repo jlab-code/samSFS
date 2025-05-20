@@ -1,7 +1,7 @@
 # samSFS
 
 
-Tools to simulate and analyze allele frequency data from somatic evolution in tree-like structures.
+Somatic evolution of stem cell mutations in plants
 
 ## 🔧 Installation
 
