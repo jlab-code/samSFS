@@ -51,7 +51,7 @@ To run the full pipeline on real observed data:
 
 ### Option 1: Open as RStudio Project (Recommended)
 1. Clone the repo.
-2. In RStudio, go to **File → Open Project → ...** and select the `samSFS/` folder.
+2. In RStudio, go to **File → Open Project** and select the `samSFS/` folder.
 3. Open `demo/test_real_data.R` and run the code line-by-line.
 4. Output will be saved to: `results/real_data_results/`
 
