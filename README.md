@@ -1,12 +1,12 @@
 # samSFS
 
-**Inferring the somatic evolution of stem cell mutations in long-lived plants**
+**Inferring the somatic evolution of stem cell mutations in plants**
 
 - Mutations originating in stem cells at the shoot apex often become fixed in large sectors of the plant body due to cell lineage drift during repeated branching.
-- Understanding the somatic evolution of such mutations requires knowledge of the **effective stem cell population size, the cellular bottleneck strength during branch initiation, and the mutation rate**.
+- Inferring the somatic evolution of such mutations requires knowledge of the **effective stem cell population size, the cellular bottleneck strength during branch initiation, and the mutation rate**.
 - This repository provides **statistical tools to estimate these parameters directly from cell-layer-specific DNA sequencing data**. 
 
-**Note:** Details regarding the biological framework and theoretical model can be found in Johannes (2025).
+**Note:** Details regarding the biological framework and theoretical model can be found in Johannes, bioRxiv https://doi.org/10.1101/2025.01.13.632685.
 
 ---
 ## Installation
